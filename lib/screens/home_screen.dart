@@ -9,16 +9,39 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Material App Bar'),
-      ),
-      body: Column(
-        children: const [
-          Card(
-            child: Text("Chart"),
+        title: const Text(
+          'SpendWise',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
           ),
-          UserTransaction(),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.add),
+            color: Colors.black,
+          ),
         ],
       ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            Card(
+              child: Text("Chart"),
+            ),
+            UserTransaction(),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
