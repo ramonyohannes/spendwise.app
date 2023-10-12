@@ -13,24 +13,24 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    // Transaction(
-    //   id: DateTime.now().toString(),
-    //   title: "New Shoe",
-    //   amount: 23.3,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: DateTime.now().toString(),
-    //   title: "Kitchen Pan",
-    //   amount: 52.1,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: DateTime.now().toString(),
-    //   title: "Pair Trousers",
-    //   amount: 98.4,
-    //   date: DateTime.now(),
-    // ),
+    Transaction(
+      id: DateTime.now().toString(),
+      title: "New Shoe",
+      amount: 23.3,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: DateTime.now().toString(),
+      title: "Kitchen Pan",
+      amount: 52.1,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: DateTime.now().toString(),
+      title: "Pair Trousers",
+      amount: 98.4,
+      date: DateTime.now(),
+    ),
   ];
 
   void addTransaction(String txTitle, double txAmount) {
@@ -43,6 +43,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
     setState(() {
       _userTransactions.add(newTx);
+    });
+  }
+
+  void _deleteTransaction(String transactionId) {
+    setState(() {
+      _userTransactions.removeWhere(
+        (traId) => traId.id == transactionId,
+      );
     });
   }
 
@@ -77,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const Card(
               child: Text("Chart"),
             ),
-            TransactionList(_userTransactions),
+            TransactionList(_userTransactions, _deleteTransaction),
           ],
         ),
       ),
