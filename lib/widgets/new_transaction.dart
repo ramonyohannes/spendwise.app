@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:intl/intl.dart';
+
 class NewTransaction extends StatefulWidget {
   final Function addTx;
   const NewTransaction(this.addTx, {super.key});
@@ -10,8 +12,8 @@ class NewTransaction extends StatefulWidget {
 
 class _NewTransactionState extends State<NewTransaction> {
   final _titleController = TextEditingController();
-
   final _amountController = TextEditingController();
+  DateTime selectedDate = DateTime.now();
 
   void submitTx(BuildContext context) {
     final enteredTitle = _titleController.text;
@@ -23,8 +25,24 @@ class _NewTransactionState extends State<NewTransaction> {
     widget.addTx(
       enteredTitle,
       enteredAmount,
+      selectedDate,
     );
     Navigator.of(context).pop();
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
   }
 
   @override
@@ -48,7 +66,28 @@ class _NewTransactionState extends State<NewTransaction> {
               textInputAction: TextInputAction.done,
               onSubmitted: (_) => submitTx(context),
             ),
-            TextButton(
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  DateFormat.yMEd().format(selectedDate),
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+                TextButton(
+                  onPressed: () => _selectDate(context),
+                  child: Text(
+                    "Select Date",
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                          color: Colors.purple,
+                        ),
+                  ),
+                )
+              ],
+            ),
+            ElevatedButton(
               onPressed: () => submitTx(context),
               child: const Text("Add Transaction"),
             ),
