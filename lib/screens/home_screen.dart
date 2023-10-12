@@ -13,24 +13,24 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    Transaction(
-      id: DateTime.now().toString(),
-      title: "New Shoe",
-      amount: 23.3,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: DateTime.now().toString(),
-      title: "Kitchen Pan",
-      amount: 52.1,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: DateTime.now().toString(),
-      title: "Pair Trousers",
-      amount: 98.4,
-      date: DateTime.now(),
-    ),
+    // Transaction(
+    //   id: DateTime.now().toString(),
+    //   title: "New Shoe",
+    //   amount: 23.3,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: DateTime.now().toString(),
+    //   title: "Kitchen Pan",
+    //   amount: 52.1,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: DateTime.now().toString(),
+    //   title: "Pair Trousers",
+    //   amount: 98.4,
+    //   date: DateTime.now(),
+    // ),
   ];
 
   void addTransaction(String txTitle, double txAmount) {
@@ -61,14 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text(
           'SpendWise',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
         ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () => startAddNewTrasaction(context),
@@ -79,6 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Card(
               child: Text("Chart"),
