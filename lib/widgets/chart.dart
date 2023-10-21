@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:spendwise/model/transaction.dart';
+import './chart_bar.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> recentTransactions;
@@ -25,15 +26,31 @@ class Chart extends StatelessWidget {
     }).reversed.toList();
   }
 
+  double get totalsum {
+    return recentTransaction.fold(0.0, (previousValue, element) {
+      return previousValue + (element['Amount'] as double);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Card(
-        elevation: 2,
+        elevation: 10,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [Column()],
+          children: recentTransaction.map((tx) {
+            return Flexible(
+              child: ChartBar(
+                tx["Day"].toString(),
+                tx["Amount"].toString(),
+                recentTransactions.isEmpty
+                    ? 0.0
+                    : (tx["Amount"] as double) / totalsum,
+              ),
+            );
+          }).toList(),
         ),
       ),
     );
