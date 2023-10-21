@@ -3,6 +3,7 @@ import '../model/transaction.dart';
 import '../widgets/new_transaction.dart';
 
 import '../widgets/transaction_list.dart';
+import '../widgets/chart.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -63,6 +64,13 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  List<Transaction> get _recentTransaction {
+    return _userTransactions
+        .where((tx) =>
+            tx.date.isAfter(DateTime.now().subtract(const Duration(days: 7))))
+        .toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,9 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Card(
-              child: Text("Chart"),
-            ),
+            Chart(_recentTransaction),
             TransactionList(_userTransactions, _deleteTransaction),
           ],
         ),
