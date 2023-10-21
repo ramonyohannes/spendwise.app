@@ -54,25 +54,40 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'SpendWise',
-        ),
-        actions: [
-          IconButton(
-            onPressed: () => startAddNewTrasaction(context),
-            icon: const Icon(Icons.add),
-            color: Colors.black,
-          ),
-        ],
+    var appBar = AppBar(
+      title: const Text(
+        'SpendWise',
       ),
-      body: SingleChildScrollView(
+      actions: [
+        IconButton(
+          onPressed: () => startAddNewTrasaction(context),
+          icon: const Icon(Icons.add),
+          color: Colors.black,
+        ),
+      ],
+    );
+    return Scaffold(
+      appBar: appBar,
+      body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Chart(_recentTransaction),
-            TransactionList(_userTransactions, _deleteTransaction),
+            SizedBox(
+              height: (MediaQuery.of(context).size.height -
+                      appBar.preferredSize.height -
+                      MediaQuery.of(context).padding.top -
+                      MediaQuery.of(context).padding.bottom) *
+                  0.25,
+              child: Chart(_recentTransaction),
+            ),
+            SizedBox(
+              height: (MediaQuery.of(context).size.height -
+                      appBar.preferredSize.height -
+                      MediaQuery.of(context).padding.top -
+                      MediaQuery.of(context).padding.bottom) *
+                  0.75,
+              child: TransactionList(_userTransactions, _deleteTransaction),
+            ),
           ],
         ),
       ),

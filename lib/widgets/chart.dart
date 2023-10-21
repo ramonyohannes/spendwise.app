@@ -42,12 +42,15 @@ class Chart extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: recentTransaction.map((tx) {
             return Flexible(
-              child: ChartBar(
-                tx["Day"].toString(),
-                tx["Amount"].toString(),
-                recentTransactions.isEmpty
-                    ? 0.0
-                    : (tx["Amount"] as double) / totalsum,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: ChartBar(
+                  tx["Day"].toString(),
+                  tx["Amount"].toString(),
+                  recentTransactions.isEmpty
+                      ? 0.0
+                      : (tx["Amount"] as double) / totalsum,
+                ),
               ),
             );
           }).toList(),

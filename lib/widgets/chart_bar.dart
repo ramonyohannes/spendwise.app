@@ -11,49 +11,60 @@ class ChartBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          FittedBox(
-            fit: BoxFit.cover,
-            child: Text(transactionPrice.toString()),
-          ),
-          const SizedBox(height: 5),
-          Container(
-            height: 80,
-            width: 15,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-              color: Colors.blueGrey,
-              borderRadius: BorderRadius.circular(10),
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return Column(
+          children: [
+            SizedBox(
+              height: constraints.maxHeight * 0.15,
+              child: FittedBox(
+                fit: BoxFit.cover,
+                child: Text(transactionPrice.toString()),
+              ),
             ),
-            child: Stack(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                FractionallySizedBox(
-                  heightFactor: hightPersontage,
-                  child: Container(
+            SizedBox(
+              height: constraints.maxHeight * 0.05,
+            ),
+            Container(
+              height: constraints.maxHeight * 0.6,
+              width: 15,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey),
+                color: Colors.blueGrey,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Stack(
+                children: [
+                  Container(
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
-                      color: Theme.of(context).primaryColor,
+                      color: Colors.grey[300],
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                ),
-              ],
+                  FractionallySizedBox(
+                    heightFactor: hightPersontage,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(height: 5),
-          Text(transactionDate)
-        ],
-      ),
+            SizedBox(
+              height: constraints.maxHeight * 0.05,
+            ),
+            SizedBox(
+              height: constraints.maxHeight * 0.15,
+              child: Text(transactionDate),
+            )
+          ],
+        );
+      },
     );
   }
 }

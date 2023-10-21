@@ -47,51 +47,58 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            TextField(
-              decoration: const InputDecoration(hintText: "Title"),
-              controller: _titleController,
-              onSubmitted: (_) => submitTx(context),
-            ),
-            TextField(
-              decoration: const InputDecoration(hintText: "Amount"),
-              controller: _amountController,
-              keyboardType: TextInputType.number,
-              textInputAction: TextInputAction.done,
-              onSubmitted: (_) => submitTx(context),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  DateFormat.yMEd().format(selectedDate),
-                  style: Theme.of(context).textTheme.labelMedium,
-                ),
-                TextButton(
-                  onPressed: () => _selectDate(context),
-                  child: Text(
-                    "Select Date",
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: Colors.purple,
-                        ),
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Container(
+          padding: EdgeInsets.only(
+            top: 10,
+            left: 10,
+            right: 10,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              TextField(
+                decoration: const InputDecoration(hintText: "Title"),
+                controller: _titleController,
+                onSubmitted: (_) => submitTx(context),
+              ),
+              TextField(
+                decoration: const InputDecoration(hintText: "Amount"),
+                controller: _amountController,
+                keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.done,
+                onSubmitted: (_) => submitTx(context),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    DateFormat.yMEd().format(selectedDate),
+                    style: Theme.of(context).textTheme.labelMedium,
                   ),
-                )
-              ],
-            ),
-            ElevatedButton(
-              onPressed: () => submitTx(context),
-              child: const Text("Add Transaction"),
-            ),
-          ],
+                  TextButton(
+                    onPressed: () => _selectDate(context),
+                    child: Text(
+                      "Select Date",
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            color: Colors.purple,
+                          ),
+                    ),
+                  )
+                ],
+              ),
+              ElevatedButton(
+                onPressed: () => submitTx(context),
+                child: const Text("Add Transaction"),
+              ),
+            ],
+          ),
         ),
       ),
     );
