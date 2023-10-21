@@ -15,7 +15,10 @@ class ChartBar extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          Text(transactionPrice.toString()),
+          FittedBox(
+            fit: BoxFit.cover,
+            child: Text(transactionPrice.toString()),
+          ),
           const SizedBox(height: 5),
           Container(
             height: 80,
@@ -30,7 +33,7 @@ class ChartBar extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
-                    color: Colors.purple,
+                    color: Colors.grey[300],
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
@@ -39,7 +42,7 @@ class ChartBar extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
-                      color: Colors.blue,
+                      color: Theme.of(context).primaryColor,
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
